@@ -8,11 +8,12 @@
 
 import UIKit
 
-class FeaturedItemsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class FeaturedAppsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     fileprivate let cellId = "cellId"
     
-    override func viewDidLoad() {
+    
+           override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView?.backgroundColor = UIColor.red
@@ -26,16 +27,15 @@ class FeaturedItemsController: UICollectionViewController, UICollectionViewDeleg
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        
+       return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
-
+        return CGSize(width: view.frame.width, height: 230)
     }
-
+    
 }
-
 
 
 
