@@ -10,9 +10,21 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var appCategory: AppCategory? {
+        didSet {
+            
+            if let name = appCategory?.name {
+                nameLabel.text = name
+            }
+            
+            appsCollectionView.reloadData()
+            
+        }
+    }
+    
     fileprivate let cellId = "appCellId"
     
-        override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
@@ -23,7 +35,7 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Strains"
+        label.text = "Products"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -43,26 +55,26 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
     
     let dividerLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0.4, alpha: 0.4)
+        view.backgroundColor = UIColor.black
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     func setupViews() {
         backgroundColor = UIColor.black
+        
         addSubview(appsCollectionView)
         addSubview(dividerLineView)
         addSubview(nameLabel)
-        
         
         appsCollectionView.dataSource = self
         appsCollectionView.delegate = self
         
         appsCollectionView.register(AppCell.self, forCellWithReuseIdentifier: cellId)
         
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-14-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-17-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
         
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-14-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": dividerLineView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": dividerLineView]))
         
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": appsCollectionView]))
         
@@ -71,13 +83,16 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    
-    
+        if let count = appCategory?.apps?.count {
+            return count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppCell
+        cell.app = appCategory?.apps?[indexPath.item]
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -88,25 +103,93 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
         return UIEdgeInsetsMake(0, 14, 0, 14)
     }
     
-
 }
 
 class AppCell: UICollectionViewCell {
-  
-    var nameLabel = ["Strains", "Edibles & Concentrates", "Clones", "Delivery"]
+    
+    var app: App? {
+        didSet {
+            if let name = app?.name {
+                nameLabel.text = name
+                
+                let rect = NSString(string: name).boundingRect(with: CGSize(width: frame.width, height: 1000), options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
+                
+                if rect.height > 20 {
+                    categoryLabel.frame = CGRect(x: 0, y: frame.width + 38, width: frame.width, height: 30)
+                    
+                } else {
+                    categoryLabel.frame = CGRect(x: 0, y: frame.width + 22, width: frame.width, height: 25)
+                    
+                }
+                
+                nameLabel.frame = CGRect(x: 0, y: frame.width + 5, width: frame.width, height: 42)
+                nameLabel.sizeToFit()
+                
+            }
+            
+            categoryLabel.text = app?.category
+            
+            if (app?.price) != nil {
+                
+            } else {
+                            }
+            
+            if let imageName = app?.imageName {
+                imageView.image = UIImage (named: imageName)
+            }
+            
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-     
-    
-        
-
-   
-    
+        setupViews()
     }
-        
-        required init?(coder aDecoder: NSCoder) {
+    
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    let imageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.layer.cornerRadius = 16
+        iv.layer.masksToBounds = true
+        return iv
+    }()
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Blue Cookies"
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    let categoryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Strains"
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textColor = UIColor.black
+        return label
+    }()
+    
+    
+    func setupViews() {
+        addSubview(imageView)
+        addSubview(nameLabel)
+        addSubview(categoryLabel)
+        
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.width)
+        nameLabel.frame = CGRect(x: 0, y: frame.width + 2, width: frame.width, height: 45)
+        categoryLabel.frame = CGRect(x: 0, y: frame.width + 38, width: frame.width, height: 25)
+        
+    }
+    
 }
+
+
+
+
 
