@@ -13,6 +13,7 @@
 		4A16DE831E2AFDB6007F0D5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A16DE821E2AFDB6007F0D5F /* Assets.xcassets */; };
 		4A16DE861E2AFDB6007F0D5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A16DE841E2AFDB6007F0D5F /* LaunchScreen.storyboard */; };
 		4A16DE921E2B486B007F0D5F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A16DE911E2B486B007F0D5F /* CategoryCell.swift */; };
+		4AFED10A1E2DEBC8006CA177 /* JSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFED1091E2DEBC8006CA177 /* JSModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4A16DE851E2AFDB6007F0D5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A16DE871E2AFDB6007F0D5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A16DE911E2B486B007F0D5F /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		4AFED1091E2DEBC8006CA177 /* JSModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				4A16DE7B1E2AFDB6007F0D5F /* AppDelegate.swift */,
 				4A16DE7D1E2AFDB6007F0D5F /* ViewController.swift */,
 				4A16DE911E2B486B007F0D5F /* CategoryCell.swift */,
+				4AFED1091E2DEBC8006CA177 /* JSModels.swift */,
 				4A16DE7F1E2AFDB6007F0D5F /* Main.storyboard */,
 				4A16DE821E2AFDB6007F0D5F /* Assets.xcassets */,
 				4A16DE841E2AFDB6007F0D5F /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				4A16DE7E1E2AFDB6007F0D5F /* ViewController.swift in Sources */,
 				4A16DE7C1E2AFDB6007F0D5F /* AppDelegate.swift in Sources */,
 				4A16DE921E2B486B007F0D5F /* CategoryCell.swift in Sources */,
+				4AFED10A1E2DEBC8006CA177 /* JSModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
